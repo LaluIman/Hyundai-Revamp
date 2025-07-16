@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/Logo.webp";
-import car from "../assets/Car_icon.webp";
+import car from "../assets/Car_Icon.png";
 
 const Navbar = () => {
     const [dropdown, setDropdown] = useState(null);
