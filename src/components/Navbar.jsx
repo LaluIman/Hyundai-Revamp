@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/Logo.webp";
 import car from "../assets/Car_Icon.png";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [dropdown, setDropdown] = useState(null);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleDropdown = (menu) => {
         setDropdown(dropdown === menu ? null : menu);
+    };
+
+    const handleVehicleNavigation = (category) => {
+        setDropdown(null);
+        setMobileOpen(false);
+        navigate(`/explore#${category.toLowerCase()}`);
     };
     
     useEffect(() => {
@@ -24,10 +32,30 @@ const Navbar = () => {
     const dropdownContents = {
         Vehicles: (
             <ul className="space-y-2">
-                <li className="hover:text-black cursor-pointer">EV</li>
-                <li className="hover:text-black cursor-pointer">SUV</li>
-                <li className="hover:text-black cursor-pointer">MVP</li>
-                <li className="hover:text-black cursor-pointer">Cars</li>
+                <li 
+                    className="hover:text-black cursor-pointer transition-colors"
+                    onClick={() => handleVehicleNavigation("ev")}
+                >
+                    EV
+                </li>
+                <li 
+                    className="hover:text-black cursor-pointer transition-colors"
+                    onClick={() => handleVehicleNavigation("suv")}
+                >
+                    SUV
+                </li>
+                <li 
+                    className="hover:text-black cursor-pointer transition-colors"
+                    onClick={() => handleVehicleNavigation("mpv")}
+                >
+                    MPV
+                </li>
+                <li 
+                    className="hover:text-black cursor-pointer transition-colors"
+                    onClick={() => handleVehicleNavigation("car")}
+                >
+                    Cars
+                </li>
             </ul>
         ),
         "Shop now": (
@@ -57,9 +85,12 @@ const Navbar = () => {
         <>
             <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-white rounded-2xl md:rounded-full border border-gray-300 w-[90%] md:w-fit md:min-w-[800px] px-6 md:px-10 py-3 flex items-center justify-between md:max-w-6xl">
                 {/* Logo */}
-                <a href="/" className="flex items-center space-x-5">
+                <button 
+                    onClick={() => navigate("/")} 
+                    className="flex items-center space-x-5 hover:opacity-80 transition-opacity"
+                >
                     <img src={logo} alt="Logo" className="h-7 w-auto" draggable={false}/>
-                </a>
+                </button>
 
                 {/* Middle Menu (Desktop) */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
